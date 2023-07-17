@@ -1,0 +1,24 @@
+---
+- name: Download Kafka from a file path
+  ansible.builtin.get_url:
+    url: https://downloads.apache.org/kafka/3.5.0/kafka_2.13-3.5.0.tgz 
+    dest: "{{ kafka_installation_path }}"
+
+- name: Extract kafka.tgz
+  ansible.builtin.unarchive:
+    src: foo.tgz
+    dest: "{{ kafka_installation_path }}"
+
+- name: Generate Zookeeper unit file
+  become: true
+  template:
+    src: ../templates/zookeeper_service.j2
+    dest: "{{ service_file_path }}/zookeeper.service"
+  notify: Make sure Zookeepr service unit is running
+
+- name: Generate Kafka unit file
+  become: true
+  template:
+    src: ../templates/kafka_service.j2
+    dest: "{{ service_file_path }}/kafka.service"
+  notify: Make sure Kafka service unit is running

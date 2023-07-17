@@ -1,0 +1,24 @@
+image: gcr.io/kaniko-project/executor:latest
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - /kaniko/executor --dockerfile ./Dockerfile --context $CI_PROJECT_DIR --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  image: bitnami/kubectl:latest
+  script:
+    - kubectl config view
+    - kubectl config set-credentials gitlab --token=$CI_JOB_TOKEN 
+    - kubectl config set-context gitlab --cluster=mycluster --user=gitlab
+    - kubectl config use-context gitlab
+    - kubectl set image deployment/myapp-deployment myapp=$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  environment:
+    name: production

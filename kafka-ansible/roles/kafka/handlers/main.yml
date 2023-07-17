@@ -1,0 +1,15 @@
+---
+# handlers file for Kafka
+- name: Make sure Kafka service unit is running
+  ansible.builtin.systemd:
+    state: started
+    name: kafka
+    enabled: true
+    daemon_reload: true
+
+- name: Make sure Zookeepr service unit is running
+  ansible.builtin.systemd:
+    state: started
+    name: kafka
+    enabled: true
+    daemon_reload: true

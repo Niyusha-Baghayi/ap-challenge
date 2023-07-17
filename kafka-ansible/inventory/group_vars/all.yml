@@ -1,0 +1,4 @@
+---
+kafka_installation_path: /bigdata/kafka
+service_file_path: /etc/systemd/system
+java_home: /usr/lib/jvm/java-11-openjdk-amd64

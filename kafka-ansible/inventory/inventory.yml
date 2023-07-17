@@ -1,0 +1,24 @@
+all:
+  hosts:
+    server1:
+      ansible_user: 
+      ansible_host: <ip_address>
+      ip: <ip_address>
+      access_ip: <ip_address>
+    server2:
+      ansible_user: 
+      ansible_host: <ip_address>
+      ip: <ip_address>
+      access_ip: <ip_address>
+    server3:
+      ansible_user: 
+      ansible_host: <ip_address>
+      ip: <ip_address>
+      access_ip: <ip_address>
+      
+  children:
+    servers:
+      hosts:
+        server1:
+        server2:
+        server3:

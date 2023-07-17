@@ -1,0 +1,5 @@
+---
+- name: Update repositories cache and install "java" package
+  ansible.builtin.apt:
+    name: default-jdk
+    update_cache: yes
