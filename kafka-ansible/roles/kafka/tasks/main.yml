@@ -6,7 +6,7 @@
 
 - name: Extract kafka.tgz
   ansible.builtin.unarchive:
-    src: foo.tgz
+    src: "{{ kafka_installation_path }}/kafka_2.13-3.5.0.tgz"
     dest: "{{ kafka_installation_path }}"
 
 - name: Generate Zookeeper unit file
